@@ -1,0 +1,42 @@
+{
+  "name": "apostrophe-link-preview-widgets",
+  "version": "1.0.0",
+  "description": "Link Previews for ApostropheCMS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/punkave/apostrophe-link-preview-widgets.git"
+  },
+  "keywords": [
+    "ApostropheCMS",
+    "Preview",
+    "Open Graph",
+    "Metadata",
+    "Schema.org",
+    "Widget"
+  ],
+  "author": "P'unk Ave",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/punkave/apostrophe-link-preview-widgets/issues"
+  },
+  "homepage": "https://github.com/punkave/apostrophe-link-preview-widgets#readme",
+  "devDependencies": {
+    "eslint": "^4.2.0",
+    "eslint-config-punkave": "^1.0.8",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-standard": "^3.0.1"
+  },
+  "dependencies": {
+    "async-request": "^1.2.0",
+    "cheerio": "^1.0.0-rc.2",
+    "node-microdata-scraper": "0.0.5"
+  }
+}
