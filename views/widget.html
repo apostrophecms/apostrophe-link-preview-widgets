@@ -1,0 +1,9 @@
+{% import 'macros/loading.html' as loading %}
+
+<div class="apos-link-preview-widget__wrapper" data-apos-link-preview-target>
+  {# gets populated by the frontend #}
+  <div class="apos-link-preview-widget__loading">
+    Loading up a preview ...
+    {{ loading.render() }}
+  </div>
+</div>
