@@ -9,6 +9,7 @@ apos.define('apostrophe-link-preview-widgets', {
           $widget.find('[data-apos-link-preview-target]').html(data.body);
         }, function (err) {
           if (err) {
+            console.log('error from server');
             console.log(err);
           }
         });

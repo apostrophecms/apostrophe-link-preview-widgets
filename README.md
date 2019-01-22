@@ -41,7 +41,6 @@ Your template will recieve an object that could look like:
 }
 ```
 
-
 ## Adding your own scrapers
 At project level configuration you can specifiy additional scraping methods to employ on the returned document.
 

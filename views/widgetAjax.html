@@ -1,4 +1,9 @@
 <div class="apos-link-preview-widget">
+  {% if data.error %}
+    <div class="apos-link-preview-widget__error">
+      Error creating preview: {{ data.error.code }}
+    </div>
+  {% endif %}
   {% if data.metaTags.ogImage %}
     <div class="apos-link-preview-widget__image">
       <img src="{{ data.metaTags.ogImage }}" alt="{{ data.metaTags.ogTitle }} | {{ alIphoneAppName }}">
