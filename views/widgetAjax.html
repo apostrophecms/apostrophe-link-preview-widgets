@@ -1,14 +1,16 @@
-<div class="apos-link-preview-widget">
-  {% if data.error %}
-    <div class="apos-link-preview-widget__error">
-      Error creating preview: {{ data.error.code }}
-    </div>
-  {% endif %}
-  {% if data.metaTags.ogImage %}
-    <div class="apos-link-preview-widget__image">
-      <img src="{{ data.metaTags.ogImage }}" alt="{{ data.metaTags.ogTitle }} | {{ alIphoneAppName }}">
-    </div>
-  {% endif %}
-    <h3>{{ data.metaTags.ogTitle }}</h3>
-    <p>{{ data.metaTags.ogDescription }}</p>
-</div>
+{% for item in data.previews %}
+  <div class="apos-link-preview-widget">
+    {% if item.error %}
+      {# <div class="apos-link-preview-widget__error">
+        Error creating preview: {{ data.error.code }}
+      </div> #}
+    {% endif %}
+    {% if item.metaTags.ogImage %}
+      <div class="apos-link-preview-widget__image">
+        <img src="{{ item.metaTags.ogImage }}" alt="{{ item.metaTags.ogTitle }} | {{ item.alIphoneAppName }}">
+      </div>
+    {% endif %}
+      <h3>{{ item.metaTags.ogTitle }}</h3>
+      <p>{{ item.metaTags.ogDescription }}</p>
+  </div>
+{% endfor %}
