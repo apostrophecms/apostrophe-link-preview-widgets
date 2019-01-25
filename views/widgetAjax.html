@@ -1,10 +1,10 @@
+{% if data.status === 'error' %}
+  <div class="apos-link-preview-widget__error">
+    Error creating preview: {{ data.message }}
+  </div>
+{% endif %}
 {% for item in data.previews %}
   <div class="apos-link-preview-widget">
-    {% if item.error %}
-      {# <div class="apos-link-preview-widget__error">
-        Error creating preview: {{ data.error.code }}
-      </div> #}
-    {% endif %}
     {% if item.metaTags.ogImage %}
       <div class="apos-link-preview-widget__image">
         <img src="{{ item.metaTags.ogImage }}" alt="{{ item.metaTags.ogTitle }} | {{ item.alIphoneAppName }}">
