@@ -47,8 +47,7 @@ module.exports = {
         const body = self.renderer('widgetAjax', { previews: data })(req);
         return res.send({
           body: body,
-          status: 'ok',
-          data: data
+          status: 'ok'
         });
       } catch (e) {
         self.apos.utils.error(e);
