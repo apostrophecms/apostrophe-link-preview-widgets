@@ -52,14 +52,15 @@ module.exports = {
         });
       } catch (e) {
         self.apos.utils.error(e);
+
         const body = self.renderer('widgetAjax', {
           status: 'error',
-          message: e.message
+          message: e.response.statusCode + ': ' + e.options.uri + ', ' + e.response.statusMessage
         })(req);
         return res.send({
           body: body,
           status: 'error',
-          message: e.message
+          message: e.response.statusCode + ': ' + e.options.uri + ', ' + e.response.statusMessage
         });
       }
     });
@@ -87,10 +88,10 @@ module.exports = {
           data.push(cache.cache);
         } else {
           let response = await request({
-            uri: encodeURI(cache.url)
+            uri: cache.url
           });
           let scrapedData = await self.scrapeData(response);
-          await previewCache.set(encodeURI(cache.url), scrapedData, 86400);
+          await previewCache.set(cache.url, scrapedData, 86400);
           data.push(scrapedData);
         }
       }
@@ -101,7 +102,7 @@ module.exports = {
     // note this was more useful when running through an array of headless urls but we still might want to hit
     // more than one at a time at some point?
     self.formatUrls = async function (data) {
-      let urls = [data.individualUrl];
+      let urls = [ encodeURI(data.individualUrl) ];
       return urls;
     };
 
