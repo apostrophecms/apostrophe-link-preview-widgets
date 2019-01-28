@@ -41,10 +41,11 @@ module.exports = {
     // Route that responds to requests from the front end
     self.route('post', 'load', async function (req, res) {
       try {
-        const urls = await self.formatUrls(req.body.data);
-        const caches = await self.getCaches(urls);
-        const data = await self.getData(caches);
-        const body = self.renderer('widgetAjax', { previews: data })(req);
+        const url = encodeURI(req.body.data.individualUrl);
+        // const urls = await self.formatUrls(req.body.data);
+        const cache = await self.getCache(url);
+        const data = await self.getData(cache);
+        const body = self.renderer('widgetAjax', data)(req);
         return res.send({
           body: body,
           status: 'ok'
@@ -54,55 +55,41 @@ module.exports = {
 
         const body = self.renderer('widgetAjax', {
           status: 'error',
-          message: e.response.statusCode + ': ' + e.options.uri + ', ' + e.response.statusMessage
+          message: e.name + ': ' + e.message
         })(req);
         return res.send({
           body: body,
           status: 'error',
-          message: e.response.statusCode + ': ' + e.options.uri + ', ' + e.response.statusMessage
+          message: e.name + ': ' + e.message
         });
       }
     });
 
     // pull all cached material for processing
-    self.getCaches = async function (urls) {
-      let caches = [];
+    self.getCache = async function (url) {
       const previewCache = self.apos.caches.get('apostrophe-link-previews');
-      for (let url of urls) {
-        caches.push({
-          url: url,
-          cache: await previewCache.get(url)
-        });
-      }
-      return caches;
+      let cache = {
+        url: url,
+        cache: await previewCache.get(url)
+      };
+      return cache;
     };
 
     // if a URL has a cache, pass it along
     // if not, fetch it, parse it, pass it along, and write it to the cache
-    self.getData = async function (caches) {
-      const data = [];
-      const previewCache = self.apos.caches.get('apostrophe-link-previews');
-      for (let cache of caches) {
-        if (cache.cache) {
-          data.push(cache.cache);
-        } else {
-          let response = await request({
-            uri: cache.url
-          });
-          let scrapedData = await self.scrapeData(response);
-          await previewCache.set(cache.url, scrapedData, 86400);
-          data.push(scrapedData);
-        }
+    self.getData = async function (cache) {
+      let data;
+      if (cache.cache) {
+        data = cache.cache;
+      } else {
+        const previewCache = self.apos.caches.get('apostrophe-link-previews');
+        let response = await request({
+          url: cache.url
+        });
+        data = await self.scrapeData(response);
+        await previewCache.set(cache.url, data, 86400);
       }
       return data;
-    };
-
-    // normalize all preview requests as an array of URLs for simple processing
-    // note this was more useful when running through an array of headless urls but we still might want to hit
-    // more than one at a time at some point?
-    self.formatUrls = async function (data) {
-      let urls = [ encodeURI(data.individualUrl) ];
-      return urls;
     };
 
     // Run response body through the array of scrapers
