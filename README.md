@@ -6,10 +6,10 @@
 `apostrophe-link-preview-widgets` lets you paste a link to an external URL and have scraped meta data returned to a template. You can customize that template and use it to display a preview of the external website within your Apostrophe site. All previews are AJAXed in after page load and the module leverages `apostrophe-caches` for fastest delivery.
 
 ## Scraping
-By default, the widget scrapes the given website and returns an object of all `<meta>` key/values in the site's `<head>` as well as any information that is part of [http://schema.org](schema.org's) microdata spec.
+By default, the widget scrapes the given website and returns an object of all `<meta>` key/values in the site's `<head>` as well as any information that is part of [http://schema.org](http://schema.org) microdata spec.
 
 ### Example response object
-Your template will recieve an object that could look like:
+Your template will receive an object that could look like:
 ```js
 {
   status: 'ok',
