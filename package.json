@@ -21,9 +21,9 @@
   "author": "P'unk Ave",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/punkave/apostrophe-link-preview-widgets/issues"
+    "url": "https://github.com/apostrophecms/apostrophe-link-preview-widgets/issues"
   },
-  "homepage": "https://github.com/punkave/apostrophe-link-preview-widgets#readme",
+  "homepage": "https://github.com/apostrophecms/apostrophe-link-preview-widgets#readme",
   "devDependencies": {
     "eslint": "^4.2.0",
     "eslint-config-punkave": "^1.0.8",
