@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.4 (2023-01-06)
+## 1.0.4 (2023-03-29)
 
 Corrected various links found in `package.json` and the documentation. No code changes.
 
